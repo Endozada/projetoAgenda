@@ -9,7 +9,7 @@ public class Contato implements Serializable {
     private int diaAniversario;
     private int mesAniversario;
 
-    public Contato(String nome, int diaAniversario, int mesAniversario) {
+    public Contato (String nome, int diaAniversario, int mesAniversario) {
         this.nome = nome;
         this.diaAniversario = diaAniversario;
         this.mesAniversario = mesAniversario;
@@ -39,30 +39,24 @@ public class Contato implements Serializable {
         this.mesAniversario = mesAniversario;
     }
 
+    public String toString() {
+        return "Contato de nome: "+this.nome+". Que aniversaria em "+this.diaAniversario+"/"+this.mesAniversario+".";
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Contato contato = (Contato) o;
-
-        if (diaAniversario != contato.diaAniversario) return false;
-        if (mesAniversario != contato.mesAniversario) return false;
-        return Objects.equals(nome, contato.nome);
+        return diaAniversario == contato.diaAniversario && mesAniversario == contato.mesAniversario && Objects.equals(nome, contato.nome);
     }
 
     @Override
     public int hashCode() {
-        int result = nome != null ? nome.hashCode() : 0;
+        int result = Objects.hashCode(nome);
         result = 31 * result + diaAniversario;
         result = 31 * result + mesAniversario;
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Contato de nome " + nome +
-                ", que aniversaria em " + diaAniversario +
-                "/" + mesAniversario;
     }
 }
